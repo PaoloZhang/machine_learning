@@ -159,66 +159,30 @@ def draw3DSurface():
 	plt.show()
 
 '''
-Plot 2 functions:
+Plot the plane:
 	 Y = W0*X0 + W1*X1 +b
-	 W0*X0 + W1*X1 + b = 0
 '''
-def draw3D(W0,W1,b):
-	points_num = 10
-	#ax = plt.subplot(111,projection = '3d')
-	X0 = []
-	X1 = []
-	X1dot = []
-	Y  = []
+def plot_plane(W0,W1,b):
+	points_num = 100
+	X0 = [np.random.normal(0,0.55) for _ in xrange(points_num)]
+	X1 = [np.random.normal(0,0.55) for _ in xrange(points_num)]
+	
 	fig = plt.figure()
-	#ax = fig.add_subplot(111,projection='3d')
-	ax = Axes3D(fig)
-	ax.set_xlabel('X')
-	ax.set_ylabel('Y')
-	ax.set_zlabel('Z')
-	#ax.plot(X0,X1,Y)
+	ax = fig.add_subplot(111,projection='3d')
+	#ax = Axes3D(fig)
+	ax.set_xlabel('X0')
+	ax.set_ylabel('X1')
+	ax.set_zlabel('Y')
 	
-	for i in xrange(points_num):
-		x0 = np.random.normal(0,0.55)
-		x1 = np.random.normal(0,0.55)
-		x1dot =  -(W0*x2+b)/W1 
-		y = W0 * x1 + W0 * x2 + b
-		
-		
-		#ax.plot(x0,x1,y)
-		
-		X0.append(x0)
-		X1.append(x1)
-		X1dot.append(x1dot)
-		Y.append(y)
-		#points_set.append([x0,x1,y])
-		#ax.scatter(x0,x1,y,c='y')
-	
-	print(X0)
-	print(X1)
 	mesh_X0,mesh_X1 = np.meshgrid(X0,X1)
-	print(X0)
-	print(X1)
 	Y = mesh_X0*W0 + mesh_X1*W1 + b
-	print(Y)
-	print("X1dot",X1dot)
-	mesh_X,mesh_Y = np.meshgrid(X0,X1dot)
 
-	#ax.plot_wireframe(mesh_X0,mesh_X1,Y,rstride=1,cstride=1)
-	Z= mesh_X * 0 + mesh_Y * 0 + np.random.normal(0,0.55)
-	Z = np.arange(-0.5,0.5 ,0.01).reshape(10,10)
-	print("Z",Z)
-	#for _ in xrange(points_num):
-	#	Z.append(np.random.normal(0,0.55))
-	print("meshX:",mesh_X)
-	print("meshY:",mesh_Y)
-	ax.plot_wireframe(mesh_X,mesh_Y,0,rstride=1,cstride=1)
-	#ax.scatter(X0,X1,Y,c='b')	
+	ax.plot_wireframe(mesh_X0,mesh_X1,Y,rstride=1,cstride=1)
 	plt.show()
 	
 
 if __name__ == '__main__':
-	W0 = 0.1
+	'''W0 = 0.1
 	W1 = 0.2
 	sample_num = 1000
 	trainData = []
@@ -238,8 +202,8 @@ if __name__ == '__main__':
 	perceptron = perceptron()
 	perceptron.init()
 	W0,W1 =perceptron.train(trainData)
-	#plt
-	draw3D(0.1,0.2,0)
+	'''#plt
+	plot_plane(0.1,0.2,-0.1)
 	
 		
 
