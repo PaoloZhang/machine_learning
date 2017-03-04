@@ -199,6 +199,24 @@ def plot_superplane(W0,W1,b):
 	ax.plot_surface(X0,X1,Y,rstride=1,cstride=1)
 	plt.show()	
 
+'''
+X,Y = numpy.meshgrid(x,y)
+x,y: vectors
+X,Y: 2-D matrix
+     The rows of X are len(y) copies of x,so np.shape(X)= [len(y),len(x)]
+	 the columns of Y are len(X) copies of y,so np.shape(Y) =[len(y),len(x)]
+	 Above:confirm that shape(X) == shape(Y)
+'''
+
+def test_meshgrid():
+	X = np.arange(1,13,1)
+	Y = np.arange(11,20,1)
+	mesh_X,mesh_Y = np.meshgrid(X,Y)
+	print("X:",X)
+	print("Y:",Y)
+	print("mseh_X:",np.shape(mesh_X),mesh_X)
+	print("mesh_Y:",np.shape(mesh_Y),mesh_Y)
+
 if __name__ == '__main__':
 	'''W0 = 0.1
 	W1 = 0.2
@@ -222,10 +240,10 @@ if __name__ == '__main__':
 	W0,W1 =perceptron.train(trainData)
 	'''#plt
 	#plot_plane(0.1,0.2,-0.1)
-	plot_surface()
+	#plot_surface()
 
 	#plot_superplane(0.1,0.2,-0.1)	
-
+	test_meshgrid()
 
 	
 
