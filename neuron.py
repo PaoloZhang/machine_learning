@@ -147,7 +147,7 @@ class perceptron(object):
 
 from mpl_toolkits.mplot3d import Axes3D
 
-def draw3DSurface():
+def plot_surface():
 	fig = plt.figure()
 	ax = Axes3D(fig)
 	X = np.arange(-4,4,0.25)
@@ -174,12 +174,30 @@ def plot_plane(W0,W1,b):
 	ax.set_ylabel('X1')
 	ax.set_zlabel('Y')
 	
-	mesh_X0,mesh_X1 = np.meshgrid(X0,X1)
-	Y = mesh_X0*W0 + mesh_X1*W1 + b
+	X0,X1 = np.meshgrid(X0,X1)
+	Y = X0*W0 + X1*W1 + b
 
-	ax.plot_wireframe(mesh_X0,mesh_X1,Y,rstride=1,cstride=1)
+	ax.plot_surface(X0,X1,Y,rstride=1,cstride=1)
 	plt.show()
-	
+
+'''
+Plot the 3D plane:
+     W0*X0 + W1*X1 + b = 0 
+'''
+
+def plot_superplane(W0,W1,b):
+	points_num = 100
+	X0 = [np.random.normal(0,0.55) for _ in xrange(points_num)]
+	Y = [np.random.normal(0,0.55) for _ in xrange(points_num)]
+	fig = plt.figure()
+	ax = fig.add_subplot(111,projection='3d')
+	ax.set_xlabel('X0')
+	ax.set_ylabel('X1')
+	ax.set_zlabel('Y')
+	X0,Y = np.meshgrid(X0,Y)
+	X1 = [-(W0*x0+b)/W1  for x0 in X0]
+	ax.plot_surface(X0,X1,Y,rstride=1,cstride=1)
+	plt.show()	
 
 if __name__ == '__main__':
 	'''W0 = 0.1
@@ -203,9 +221,10 @@ if __name__ == '__main__':
 	perceptron.init()
 	W0,W1 =perceptron.train(trainData)
 	'''#plt
-	plot_plane(0.1,0.2,-0.1)
-	
-		
+	#plot_plane(0.1,0.2,-0.1)
+	plot_surface()
+
+	#plot_superplane(0.1,0.2,-0.1)	
 
 
 	
