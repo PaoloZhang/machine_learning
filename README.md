@@ -1,4 +1,4 @@
-# # About this folder
+# About Machine Learning folder
 
 
 
