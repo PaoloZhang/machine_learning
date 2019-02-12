@@ -30,7 +30,7 @@ $= \begin{bmatrix} {x}_{1} & {x}_{2} &  \cdots  & {x}_{n}  \end{bmatrix} \begin{
 
 ​    $i \neq k, j \neq k$ 时为 part2; 
 
-​    $i = k, j \neq k$时为 part3; 
+​    $i = k, j \neq k​$时为 part3; 
 
 ​    $i \neq k, j = k$时 为 part4;
 
@@ -44,11 +44,11 @@ $= \begin{bmatrix} {x}_{1} & {x}_{2} &  \cdots  & {x}_{n}  \end{bmatrix} \begin{
 
   $part4 = \frac{\partial \sum_{i \neq k}^{n} {A}_{ik} {x}_{i}{x}_{k}}{{x}_{k}} = \sum_{i \neq k}^{n}{A}_{ik}{x}_{i} = \sum_{j \neq k}^{n}{A}_{jk}{x}_{j} = \sum_{j \neq k}^{n}{A}_{kj}{x}_{j}​$
 
-  $\because$ matrix A is symmetric , $\therefore {A}_{jk} = {A}_{kj}$.
+  $\because​$ matrix A is symmetric , $\therefore {A}_{jk} = {A}_{kj}​$.
 
    可得: $part4=part3$ ,
 
-​    $\therefore$ $\frac{\partial}{\partial {x}_{k}}({f}_{1}(x)) = part1 + 2part3 = 2{A}_{kk}{x}_{k} + 2\sum_{j \neq k}^{n}{A}_{kj}{x}_{j} = 2\sum_{j = 1}^{n}{A}_{kj}{x}_{j} = 2\begin{bmatrix} {R}_{1}{x}_{1} \\ {R}_{2}{x}_{2} \\ \vdots  \\ {R}_{n}{x}_{n}  \end{bmatrix} = 2\begin{bmatrix} {R}_{1} \\ {R}_{2} \\ \vdots \\ {R}_{n} \end{bmatrix}x  = 2Ax$ ,
+​    $\therefore \frac{\partial}{\partial {x}_{k}}({f}_{1}(x)) = part1 + 2part3 = 2{A}_{kk}{x}_{k} + 2\sum_{j \neq k}^{n}{A}_{kj}{x}_{j} = 2\sum_{j = 1}^{n}{A}_{kj}{x}_{j} = 2\begin{bmatrix} {R}_{1}{x}_{1} \\ {R}_{2}{x}_{2} \\ \vdots  \\ {R}_{n}{x}_{n}  \end{bmatrix} = 2\begin{bmatrix} {R}_{1} \\ {R}_{2} \\ \vdots \\ {R}_{n} \end{bmatrix}x  = 2Ax$ ,
 
   综上：$\frac{\partial}{\partial {x}_{k}}({f}_{1}(x)) = 2Ax$ , 设：${f}_{2}(x) = {b}^Tx = \sum_{i=1}^{n}{{b}_{i}{x}_{i}}$ ,
 
@@ -72,3 +72,59 @@ Let $f(x) = g(h(x))​$,where $g:R \rightarrow R​$ is differentiable and $h:{R
 
 $ \therefore \triangledown f(x) = \frac{d}{dy}g(y)\frac{\partial y}{\partial x} = \frac{d}{dh}g(h)\frac{\partial h}{\partial x} = \frac{d}{dh}g(h) \begin{bmatrix} \frac{\partial}{\partial {x}_{1}}h \\ \frac{\partial}{\partial {x}_{2}}h \\ \vdots \\ \frac{\partial}{\partial {x}_{n}}h \\ \end{bmatrix} = \begin{bmatrix} \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{1}}h \\ \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{2}}h \\ \vdots \\ \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{n}}h \\ \end{bmatrix} $
 
+### 第三问
+
+Let $f(x)= {x}^{T}Ax+{b}^{T}x$,where A is symmetric and $b \in {R}^{n}$ is a vector. What is ${\triangledown}^{2}f(x)$?
+
+### 解：
+
+由Hessians矩阵可知：${\triangledown}^{2}f(x) = \begin{bmatrix}
+  {b}_{11} & {b}_{12} & \cdots & {b}_{1n} \\
+  {b}_{21} & {b}_{22} & \cdots & {b}_{2n}  \\
+  \vdots & \vdots & \ddots &\vdots \\
+  {b}_{n1} & {b}_{n2} & \cdots & {b}_{nn}  \\
+ \end{bmatrix}​$ 
+结合第一问的结论，可知，
+通项${b}_{ij} =  \frac{{\partial}^{2}}{\partial {x}_{i} \partial {x}_{j}}f(x)= \frac{{\partial}^{2}}{\partial {x}_{i} \partial {x}_{j}}\sum_{i=1}^{n}\sum_{j=1}^{n}{A}_{ij}{x}_{i}{x}_{j} + \frac{{\partial}^{2}}{\partial {x}_{i} \partial {x}_{j}}\sum_{i=1}^{n}{b}_{i}{x}_{i}={A}_{ij} + 0 = {A}_{ij}​$ 
+可得：${\triangledown}^{2}f(x)=A​$
+
+### 小结
+
+如同第一问，这同样是一个很形式化的结论，如果A,x,b是标量，我们可轻易得到结论：${\triangledown}^{2} (A{x}^{2}+bx) = A。$ 
+由本题推算过程可知：这个结论当x为向量时，依然成立，只是 $A{x}^{2}$需表述成：${x}^{T}Ax$,且A必须对称矩阵;bx需表述成${b}^{T}x$。
+
+### 第四问
+
+Let $f(x)=g({a}^{T}x)$, where $g:R \rightarrow R$ is continuously differentiable and $a \in {R}^{n}$ is a vector. What are $\triangledown f(x)$ and $\triangledown^{2}f(x)$? (Hint: your expression for $\triangledown^{2}f(x)$ may have as few as 11 symbols, including $^{,}$ and parentheses.)
+
+### 解：
+
+令 $y={a}^{T}x$,则
+$\triangledown g(x) = \frac{dg}{dy}\begin{bmatrix}
+\frac{\partial}{\partial {x}_{1}}({a}^{T}x) \\
+\frac{\partial}{\partial {x}_{2}}({a}^{T}x) \\
+\vdots \\
+\frac{\partial}{\partial {x}_{n}}({a}^{T}x) \\
+\end{bmatrix}
+= {g}^{,}({a}^{T}x)\begin{bmatrix}
+{a}_{1}\\ {a}_{2}\\ \vdots\\ {a}_{n} 
+\end{bmatrix}
+= {g}^{,}({a}^{T}x)\cdot a$ 
+$
+\triangledown^{2}g(x)
+= \begin{bmatrix}
+{C}_{11} & C_{12} & \cdots & C_{1n} \\
+{C}_{21} & C_{22} & \cdots & C_{2n} \\
+\vdots   & \vdots & \ddots & \vdots \\
+{C}_{n1} & C_{n2} & \cdots & C_{nn}
+\end{bmatrix}\\
+$
+其中：${C}_{ij}
+= \frac{\partial}{\partial {x}_{i}} \frac{\partial}{\partial {x}_{j}} g({a}^{T}x)
+= \frac{\partial}{\partial {x}_{i}} (g'({a}^{T}x) \cdot {a}_{j})
+= {a}_{j}\frac{\partial}{\partial {x}_{i}} g'({a}^{T}x)
+= {a}_{j} {g}^{}({a}^{T}x)\cdot {a}_{i} 
+=  {a}_{i}{a}_{j}{g}^{''}({a}^{T}x)
+$
+可知：$\triangledown^{2}g(x) 
+= a\cdot {a}^{T}{g}^{''}({a}^{T}x)​$
