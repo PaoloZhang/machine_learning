@@ -2,7 +2,7 @@
 
 机器学习对于数学要求比较高，但是学习过程中也不能淹没在数学细节中。机器学习的重要的数学基础之一是`线性代数`和`多变量微积分`（`Linear Algebra` and `Multivariable Calculus`）。对于这门学科要掌握到什么程度?请弄懂以下三道试题即可。
 
-## 问题一 {Gradients and Hessians}
+## 第一题 {Gradients and Hessians}
 
 ### 题目
 
@@ -16,9 +16,9 @@ Let $f(x)=\frac{1}{2}{x}^{T}Ax + {b}^{T}x$ where A is a symmetric matrix and $b 
 
 A可以写成：$A = \begin{bmatrix} {R}_{1} \\ {R}_{2} \\ \cdots \\ {R}_{n} \end{bmatrix}$ 其中 $ {R}_{i} = \begin{bmatrix} {A}_{i1} & {A}_{i2} & \cdots & {A}_{in} \end{bmatrix} $,
 
-设:$ {f}_{1}(x) = {x}^{T}Ax = {x}^{T}(Ax)={x}^{T}(\begin{bmatrix} {R}_{1} \\ {R}_{2} \\ \cdots \\ {R}_{n} \end{bmatrix}x) = {x}^{T}\begin{bmatrix} {R}_{1}x \\ {R}_{2}x \\ \cdots \\ {R}_{n}x \end{bmatrix} = {x}^{T}\begin{bmatrix} {R}_{1}x \\ {R}_{2}x \\ \cdots \\ {R}_{n}x \end{bmatrix} $ (其中：${R}_{i}$为行向量；$x​$为列向量) 
+设:$ {f}_{1}(x) = {x}^{T}Ax = {x}^{T}(Ax)={x}^{T}(\begin{bmatrix} {R}_{1} \\ {R}_{2} \\ \cdots \\ {R}_{n} \end{bmatrix}x) = {x}^{T}\begin{bmatrix} {R}_{1}x \\ {R}_{2}x \\ \cdots \\ {R}_{n}x \end{bmatrix} = {x}^{T}\begin{bmatrix} {R}_{1}x \\ {R}_{2}x \\ \cdots \\ {R}_{n}x \end{bmatrix} ​$ (其中：${R}_{i}​$为行向量；$x​$为列向量) 
 
-$= \begin{bmatrix} {x}_{1} & {x}_{2} &  \cdots  & {x}_{n}  \end{bmatrix} \begin{bmatrix} {R}_{1}x \\ {R}_{2}x \\ \vdots \\ {R}_{n}x  \end{bmatrix}  =\sum_{i=1}^{n}{{x}_{i}{R}_{i}x} =\sum_{i=1}^{n}{({R}_{i}x){x}_{i}} = \sum_{i=1}^{n}{\sum_{j=1}^{n}{{A}_{ij}{x}_{j}}{x}_{i}} = \sum_{i=1}^{n}{\sum_{j=1}^{n}{{A}_{ij}{x}_{i}}{x}_{j}} $
+$= \begin{bmatrix} {x}_{1} & {x}_{2} &  \cdots  & {x}_{n}  \end{bmatrix} \begin{bmatrix} {R}_{1}x \\ {R}_{2}x \\ \vdots \\ {R}_{n}x  \end{bmatrix}  =\sum_{i=1}^{n}{{x}_{i}{R}_{i}x} =\sum_{i=1}^{n}{({R}_{i}x){x}_{i}} = \sum_{i=1}^{n}{\sum_{j=1}^{n}{{A}_{ij}{x}_{j}}{x}_{i}} = \sum_{i=1}^{n}{\sum_{j=1}^{n}{{A}_{ij}{x}_{i}}{x}_{j}} ​$
 
 所以：$\triangledown {f}_{1}(x)=\begin{bmatrix} \frac{\partial}{\partial {x}_{1}}({f}_{1}(x)) \\ \frac{\partial}{\partial {x}_{2}}({f}_{1}(x)) \\ \vdots \\ \frac{\partial}{\partial {x}_{k}}({f}_{1}(x)) \\ \vdots \\ \frac{\partial}{\partial {x}_{n}}({f}_{1}(x)) \\ \end{bmatrix} $ 
 
@@ -70,7 +70,7 @@ Let $f(x) = g(h(x))​$,where $g:R \rightarrow R​$ is differentiable and $h:{R
 
 设 $y = h(x)$ $y \in R$ 则:$f(x) = g(y)$ 
 
-$ \therefore \triangledown f(x) = \frac{d}{dy}g(y)\frac{\partial y}{\partial x} = \frac{d}{dh}g(h)\frac{\partial h}{\partial x} = \frac{d}{dh}g(h) \begin{bmatrix} \frac{\partial}{\partial {x}_{1}}h \\ \frac{\partial}{\partial {x}_{2}}h \\ \vdots \\ \frac{\partial}{\partial {x}_{n}}h \\ \end{bmatrix} = \begin{bmatrix} \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{1}}h \\ \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{2}}h \\ \vdots \\ \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{n}}h \\ \end{bmatrix} $
+$ \therefore \triangledown f(x) = \frac{d}{dy}g(y)\frac{\partial y}{\partial x} = \frac{d}{dh}g(h)\frac{\partial h}{\partial x} = \frac{d}{dh}g(h) \begin{bmatrix} \frac{\partial}{\partial {x}_{1}}h \\ \frac{\partial}{\partial {x}_{2}}h \\ \vdots \\ \frac{\partial}{\partial {x}_{n}}h \\ \end{bmatrix} = \begin{bmatrix} \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{1}}h \\ \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{2}}h \\ \vdots \\ \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{n}}h \\ \end{bmatrix} ​$
 
 ### 第三问
 
@@ -99,7 +99,7 @@ Let $f(x)=g({a}^{T}x)$, where $g:R \rightarrow R$ is continuously differentiable
 
 ### 解：
 
-令 $y={a}^{T}x$,则
+令 $y={a}^{T}x​$,则
 $\triangledown g(x) = \frac{dg}{dy}\begin{bmatrix}
 \frac{\partial}{\partial {x}_{1}}({a}^{T}x) \\
 \frac{\partial}{\partial {x}_{2}}({a}^{T}x) \\
@@ -109,7 +109,7 @@ $\triangledown g(x) = \frac{dg}{dy}\begin{bmatrix}
 = {g}^{,}({a}^{T}x)\begin{bmatrix}
 {a}_{1}\\ {a}_{2}\\ \vdots\\ {a}_{n} 
 \end{bmatrix}
-= {g}^{,}({a}^{T}x)\cdot a$ 
+= {g}^{,}({a}^{T}x)\cdot a​$ 
 $
 \triangledown^{2}g(x)
 = \begin{bmatrix}
@@ -118,13 +118,35 @@ $
 \vdots   & \vdots & \ddots & \vdots \\
 {C}_{n1} & C_{n2} & \cdots & C_{nn}
 \end{bmatrix}\\
-$
+​$
 其中：${C}_{ij}
 = \frac{\partial}{\partial {x}_{i}} \frac{\partial}{\partial {x}_{j}} g({a}^{T}x)
 = \frac{\partial}{\partial {x}_{i}} (g'({a}^{T}x) \cdot {a}_{j})
 = {a}_{j}\frac{\partial}{\partial {x}_{i}} g'({a}^{T}x)
 = {a}_{j} {g}^{}({a}^{T}x)\cdot {a}_{i} 
 =  {a}_{i}{a}_{j}{g}^{''}({a}^{T}x)
-$
+​$
 可知：$\triangledown^{2}g(x) 
 = a\cdot {a}^{T}{g}^{''}({a}^{T}x)​$
+
+## 第二题、{Positive definite matrices}
+
+### 题目
+
+A matrix $A \in {R}^{n×n}$ is positive semi-definite (PSD), denoted $A \ge 0 $, if $ A = {A}^{T}$ and ${x}^T Ax \ge 0$ for all $x \in {R}^{n}$. A matrix $A$ is positive definite,denoted $A > 0$,if $A={A}^{T}$ and ${x}^TAx>0$ for all $x\ne 0$, that is, all non-zero vectors x.The simplest example of a positive definite matrix is the identity I (the diagonal matrix with 1s on the diagonal and 0s elsewhere), which satisfies ${x}^TIx={\left\| x\right\|}_2^2 = \sum_{i=1}^{n}{{x}_{i}^2} $.
+
+### 第一问
+
+Let $z \in {R}^{n}$ be an n-vector. Show that $A = z{z}^T$ is positive semi-definite. 
+
+### 解：
+
+首先:$A^T = (zz^T)^T = zz^T=A$
+
+$zz^T=\begin{bmatrix} z_1 \\ z_2 \\ \vdots \\ z_n \end{bmatrix} \begin{bmatrix} z_1 & z_2 & \cdots & z_n \end{bmatrix}=\begin{bmatrix} z_1z_1 & z_1z_2 & \cdots & z_1z_n \\ z_2z_1 & z_2z_2 & \cdots & z_2z_n \\ \vdots &\vdots &\ddots & \vdots \\ z_nz_1 & z_nz_2 & \cdots &z_nz_n\end{bmatrix}​$
+
+$ \therefore A_{ij} = z_iz_j$
+
+由第一题可知：${x}^{T}Ax =\sum_{i=1}^{n}{\sum_{j=1}^{n}{{A}_{ij}{x}_{i}}{x}_{j}}=\sum_{i=1}^{n}{\sum_{j=1}^{n}{z_iz_j{x}_{i}}{x}_{j}}=\sum_{i=1}^{n}z_ix_i\sum_{j=1}^{n}z_ix_j={(\sum_{i=1}^{n}z_ix_i)}^2 \ge 0$  for $x\in R^n$
+
+所以：A is PSD。
