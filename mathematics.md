@@ -6,7 +6,7 @@
 
 ### 题目
 
-Recall that a matrix $A \in {R}^{n \times n}$ is symmetric if $A^T=A$, that is, ${A}_{ij}={A}_{ji}$ for all $i, j$. Also recall the gradient $\triangledown f(x)$ of a function $f:{R}^{n} \rightarrow n$ which is the n-vector of partial derivatives $\triangledown f(x) = \begin{bmatrix} \frac { \partial  }{ \partial { x }_{ 1 } }f(x) \\ \vdots \\ \frac { \partial  }{ \partial { x }_{ n }}f(x) \end{bmatrix}$ where $x =  \begin{bmatrix} {x}_{1} \\ \vdots \\ {x}_{n} \end{bmatrix}$. The hessian ${\triangledown}^{2}f(x)$ of a function $f:{R}^{n} \rightarrow R$ is the $ n \times n$ symmetric matrix of twice partial derivatives, $\begin{bmatrix} \frac{{\partial}^{2}}{\partial {x}_{1}^{2}}f(x) & \frac{{\partial}^{2}}{\partial {x}_{1} {x}_{2}}f(x) & \cdots & \frac{{\partial}^{2}}{\partial {x}_{1} \partial {x}_{n}}f(x) \\ \frac{{\partial}^{2}}{\partial {x}_{2}{x}_{1}}f(x) & \frac{{\partial}^{2}}{\partial {x}_{2}^{2}}f(x) & \cdots & \frac{{\partial}^{2}}{\partial {x}_{2} \partial {x}_{n}}f(x) \\ \vdots & \vdots & \ddots & \vdots \\ \frac{{\partial}^{2}}{\partial {x}_{n}{x}_{1}}f(x) & \frac{{\partial}^{2}}{\partial {x}_{n}{x}_{2}}f(x) & \cdots & \frac{{\partial}^{2}}{\partial {x}_{n}^{2}}f(x) \end{bmatrix}​$. 
+Recall that a matrix $A \in {R}^{n \times n}$ is symmetric if $A^T=A$, that is, ${A}_{ij}={A}_{ji}$ for all $i, j$. Also recall the gradient $\triangledown f(x)$ of a function $f:{R}^{n} \rightarrow n$ which is the n-vector of partial derivatives $\triangledown f(x) = \begin{bmatrix} \frac { \partial  }{ \partial { x }_{ 1 } }f(x) \\ \vdots \\ \frac { \partial  }{ \partial { x }_{ n }}f(x) \end{bmatrix}$ where $x =  \begin{bmatrix} {x}_{1} \\ \vdots \\ {x}_{n} \end{bmatrix}$. The hessian ${\triangledown}^{2}f(x)$ of a function $f:{R}^{n} \rightarrow R$ is the $n \times n$ symmetric matrix of twice partial derivatives, $\begin{bmatrix} \frac{{\partial}^{2}}{\partial {x}_{1}^{2}}f(x) & \frac{{\partial}^{2}}{\partial {x}_{1} {x}_{2}}f(x) & \cdots & \frac{{\partial}^{2}}{\partial {x}_{1} \partial {x}_{n}}f(x) \\ \frac{{\partial}^{2}}{\partial {x}_{2}{x}_{1}}f(x) & \frac{{\partial}^{2}}{\partial {x}_{2}^{2}}f(x) & \cdots & \frac{{\partial}^{2}}{\partial {x}_{2} \partial {x}_{n}}f(x) \\ \vdots & \vdots & \ddots & \vdots \\ \frac{{\partial}^{2}}{\partial {x}_{n}{x}_{1}}f(x) & \frac{{\partial}^{2}}{\partial {x}_{n}{x}_{2}}f(x) & \cdots & \frac{{\partial}^{2}}{\partial {x}_{n}^{2}}f(x) \end{bmatrix}​$. 
 
 ### 第一问
 
@@ -14,13 +14,13 @@ Let $f(x)=\frac{1}{2}{x}^{T}Ax + {b}^{T}x$ where A is a symmetric matrix and $b 
 
 ### 解：
 
-A可以写成：$A = \begin{bmatrix} {R}_{1} \\ {R}_{2} \\ \cdots \\ {R}_{n} \end{bmatrix}$ 其中 $ {R}_{i} = \begin{bmatrix} {A}_{i1} & {A}_{i2} & \cdots & {A}_{in} \end{bmatrix} $,
+A可以写成：$A = \begin{bmatrix} {R}_{1} \\ {R}_{2} \\ \cdots \\ {R}_{n} \end{bmatrix}$ 其中 ${R}_{i} = \begin{bmatrix} {A}_{i1} & {A}_{i2} & \cdots & {A}_{in} \end{bmatrix}$,
 
-设:$ {f}_{1}(x) = {x}^{T}Ax = {x}^{T}(Ax)={x}^{T}(\begin{bmatrix} {R}_{1} \\ {R}_{2} \\ \cdots \\ {R}_{n} \end{bmatrix}x) = {x}^{T}\begin{bmatrix} {R}_{1}x \\ {R}_{2}x \\ \cdots \\ {R}_{n}x \end{bmatrix} = {x}^{T}\begin{bmatrix} {R}_{1}x \\ {R}_{2}x \\ \cdots \\ {R}_{n}x \end{bmatrix} ​$ (其中：${R}_{i}​$为行向量；$x​$为列向量) 
+设:${f}_{1}(x) = {x}^{T}Ax = {x}^{T}(Ax)={x}^{T}(\begin{bmatrix} {R}_{1} \\ {R}_{2} \\ \cdots \\ {R}_{n} \end{bmatrix}x) = {x}^{T}\begin{bmatrix} {R}_{1}x \\ {R}_{2}x \\ \cdots \\ {R}_{n}x \end{bmatrix} = {x}^{T}\begin{bmatrix} {R}_{1}x \\ {R}_{2}x \\ \cdots \\ {R}_{n}x \end{bmatrix} ​$ (其中：${R}_{i}​$为行向量；$x​$为列向量) 
 
 $= \begin{bmatrix} {x}_{1} & {x}_{2} &  \cdots  & {x}_{n}  \end{bmatrix} \begin{bmatrix} {R}_{1}x \\ {R}_{2}x \\ \vdots \\ {R}_{n}x  \end{bmatrix}  =\sum_{i=1}^{n}{{x}_{i}{R}_{i}x} =\sum_{i=1}^{n}{({R}_{i}x){x}_{i}} = \sum_{i=1}^{n}{\sum_{j=1}^{n}{{A}_{ij}{x}_{j}}{x}_{i}} = \sum_{i=1}^{n}{\sum_{j=1}^{n}{{A}_{ij}{x}_{i}}{x}_{j}} ​$
 
-所以：$\triangledown {f}_{1}(x)=\begin{bmatrix} \frac{\partial}{\partial {x}_{1}}({f}_{1}(x)) \\ \frac{\partial}{\partial {x}_{2}}({f}_{1}(x)) \\ \vdots \\ \frac{\partial}{\partial {x}_{k}}({f}_{1}(x)) \\ \vdots \\ \frac{\partial}{\partial {x}_{n}}({f}_{1}(x)) \\ \end{bmatrix} $ 
+所以：$\triangledown {f}_{1}(x)=\begin{bmatrix} \frac{\partial}{\partial {x}_{1}}({f}_{1}(x)) \\ \frac{\partial}{\partial {x}_{2}}({f}_{1}(x)) \\ \vdots \\ \frac{\partial}{\partial {x}_{k}}({f}_{1}(x)) \\ \vdots \\ \frac{\partial}{\partial {x}_{n}}({f}_{1}(x)) \\ \end{bmatrix}$ 
 
 ​    通项：$\frac{\partial}{\partial {x}_{k}}({f}_{1}(x))=\frac{\partial}{\partial {x}_{k}}(\sum_{i=1}^{n}{\sum_{j=1}^{n}{{A}_{ij}{x}_{i}}{x}_{j}}) = part1 + part2 + part3 + part4$ ,
 
@@ -70,7 +70,7 @@ Let $f(x) = g(h(x))​$,where $g:R \rightarrow R​$ is differentiable and $h:{R
 
 设 $y = h(x)$ $y \in R$ 则:$f(x) = g(y)$ 
 
-$ \therefore \triangledown f(x) = \frac{d}{dy}g(y)\frac{\partial y}{\partial x} = \frac{d}{dh}g(h)\frac{\partial h}{\partial x} = \frac{d}{dh}g(h) \begin{bmatrix} \frac{\partial}{\partial {x}_{1}}h \\ \frac{\partial}{\partial {x}_{2}}h \\ \vdots \\ \frac{\partial}{\partial {x}_{n}}h \\ \end{bmatrix} = \begin{bmatrix} \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{1}}h \\ \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{2}}h \\ \vdots \\ \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{n}}h \\ \end{bmatrix} ​$
+$\therefore \triangledown f(x) = \frac{d}{dy}g(y)\frac{\partial y}{\partial x} = \frac{d}{dh}g(h)\frac{\partial h}{\partial x} = \frac{d}{dh}g(h) \begin{bmatrix} \frac{\partial}{\partial {x}_{1}}h \\ \frac{\partial}{\partial {x}_{2}}h \\ \vdots \\ \frac{\partial}{\partial {x}_{n}}h \\ \end{bmatrix} = \begin{bmatrix} \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{1}}h \\ \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{2}}h \\ \vdots \\ \frac{d}{dh}g(h)\frac{\partial}{\partial {x}_{n}}h \\ \end{bmatrix}$
 
 ### 第三问
 
@@ -78,14 +78,8 @@ Let $f(x)= {x}^{T}Ax+{b}^{T}x$,where A is symmetric and $b \in {R}^{n}$ is a vec
 
 ### 解：
 
-由Hessians矩阵可知：${\triangledown}^{2}f(x) = \begin{bmatrix}
-  {b}_{11} & {b}_{12} & \cdots & {b}_{1n} \\
-  {b}_{21} & {b}_{22} & \cdots & {b}_{2n}  \\
-  \vdots & \vdots & \ddots &\vdots \\
-  {b}_{n1} & {b}_{n2} & \cdots & {b}_{nn}  \\
- \end{bmatrix}​$ 
-结合第一问的结论，可知，
-通项${b}_{ij} =  \frac{{\partial}^{2}}{\partial {x}_{i} \partial {x}_{j}}f(x)= \frac{{\partial}^{2}}{\partial {x}_{i} \partial {x}_{j}}\sum_{i=1}^{n}\sum_{j=1}^{n}{A}_{ij}{x}_{i}{x}_{j} + \frac{{\partial}^{2}}{\partial {x}_{i} \partial {x}_{j}}\sum_{i=1}^{n}{b}_{i}{x}_{i}={A}_{ij} + 0 = {A}_{ij}​$ 
+由Hessians矩阵可知:${\triangledown}^{2}f(x) = \begin{bmatrix} {b}_{11} & {b}_{12} & \cdots & {b}_{1n} \\ {b}_{21} & {b}_{22} & \cdots & {b}_{2n}  \\ \vdots & \vdots & \ddots &\vdots \\ {b}_{n1} & {b}_{n2} & \cdots & {b}_{nn}  \\ \end{bmatrix}​$ 
+结合第一问的结论，可知:通项${b}_{ij} =  \frac{{\partial}^{2}}{\partial {x}_{i} \partial {x}_{j}}f(x)= \frac{{\partial}^{2}}{\partial {x}_{i} \partial {x}_{j}}\sum_{i=1}^{n}\sum_{j=1}^{n}{A}_{ij}{x}_{i}{x}_{j} + \frac{{\partial}^{2}}{\partial {x}_{i} \partial {x}_{j}}\sum_{i=1}^{n}{b}_{i}{x}_{i}={A}_{ij} + 0 = {A}_{ij}​$ 
 可得：${\triangledown}^{2}f(x)=A​$
 
 ### 小结
@@ -99,41 +93,18 @@ Let $f(x)=g({a}^{T}x)$, where $g:R \rightarrow R$ is continuously differentiable
 
 ### 解：
 
-令 $y={a}^{T}x​$,则
-$\triangledown g(x) = \frac{dg}{dy}\begin{bmatrix}
-\frac{\partial}{\partial {x}_{1}}({a}^{T}x) \\
-\frac{\partial}{\partial {x}_{2}}({a}^{T}x) \\
-\vdots \\
-\frac{\partial}{\partial {x}_{n}}({a}^{T}x) \\
-\end{bmatrix}
-= {g}^{,}({a}^{T}x)\begin{bmatrix}
-{a}_{1}\\ {a}_{2}\\ \vdots\\ {a}_{n} 
-\end{bmatrix}
-= {g}^{,}({a}^{T}x)\cdot a​$ 
-$
-\triangledown^{2}g(x)
-= \begin{bmatrix}
-{C}_{11} & C_{12} & \cdots & C_{1n} \\
-{C}_{21} & C_{22} & \cdots & C_{2n} \\
-\vdots   & \vdots & \ddots & \vdots \\
-{C}_{n1} & C_{n2} & \cdots & C_{nn}
-\end{bmatrix}\\
-​$
-其中：${C}_{ij}
-= \frac{\partial}{\partial {x}_{i}} \frac{\partial}{\partial {x}_{j}} g({a}^{T}x)
-= \frac{\partial}{\partial {x}_{i}} (g'({a}^{T}x) \cdot {a}_{j})
-= {a}_{j}\frac{\partial}{\partial {x}_{i}} g'({a}^{T}x)
-= {a}_{j} {g}^{}({a}^{T}x)\cdot {a}_{i} 
-=  {a}_{i}{a}_{j}{g}^{''}({a}^{T}x)
-​$
-可知：$\triangledown^{2}g(x) 
-= a\cdot {a}^{T}{g}^{''}({a}^{T}x)​$
+令 $y={a}^{T}x​$,则 $\triangledown g(x) = \frac{dg}{dy}\begin{bmatrix} \frac{\partial}{\partial {x}_{1}}({a}^{T}x) \\ \frac{\partial}{\partial {x}_{2}}({a}^{T}x) \\ \vdots \\ \frac{\partial}{\partial {x}_{n}}({a}^{T}x) \\ \end{bmatrix} = {g}^{,}({a}^{T}x)\begin{bmatrix} {a}_{1}\\ {a}_{2}\\ \vdots\\ {a}_{n}  \end{bmatrix} = {g}^{,}({a}^{T}x)\cdot a​$
+
+$\triangledown^{2}g(x)= \begin{bmatrix} {C}_{11} & C_{12} & \cdots & C_{1n} \\ {C}_{21} & C_{22} & \cdots & C_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ {C}_{n1} & C_{n2} & \cdots & C_{nn} \end{bmatrix}$
+其中：${C}_{ij} = \frac{\partial}{\partial {x}_{i}} \frac{\partial}{\partial {x}_{j}} g({a}^{T}x) = \frac{\partial}{\partial {x}_{i}} (g'({a}^{T}x) \cdot {a}_{j}) = {a}_{j}\frac{\partial}{\partial {x}_{i}} g'({a}^{T}x) = {a}_{j} {g}^{}({a}^{T}x)\cdot {a}_{i} =  {a}_{i}{a}_{j}{g}^{''}({a}^{T}x)$
+可知：\
+$\triangledown^{2}g(x) = a\cdot {a}^{T}{g}^{''}({a}^{T}x)​$
 
 ## 第二题、{Positive definite matrices}
 
 ### 题目
 
-A matrix $A \in {R}^{n×n}$ is positive semi-definite (PSD), denoted $A \ge 0 $, if $ A = {A}^{T}$ and ${x}^T Ax \ge 0$ for all $x \in {R}^{n}$. A matrix $A$ is positive definite,denoted $A > 0$,if $A={A}^{T}$ and ${x}^TAx>0$ for all $x\ne 0$, that is, all non-zero vectors x.The simplest example of a positive definite matrix is the identity I (the diagonal matrix with 1s on the diagonal and 0s elsewhere), which satisfies ${x}^TIx={\left\| x\right\|}_2^2 = \sum_{i=1}^{n}{{x}_{i}^2} $.
+A matrix $A \in {R}^{n×n}$ is positive semi-definite (PSD), denoted $A \ge 0$, if $A = {A}^{T}$ and ${x}^T Ax \ge 0$ for all $x \in {R}^{n}$. A matrix $A$ is positive definite,denoted $A > 0$,if $A={A}^{T}$ and ${x}^TAx>0$ for all $x\ne 0$, that is, all non-zero vectors x.The simplest example of a positive definite matrix is the identity I (the diagonal matrix with 1s on the diagonal and 0s elsewhere), which satisfies ${x}^TIx={\left\| x\right\|}_2^2 = \sum_{i=1}^{n}{{x}_{i}^2}$.
 
 ### 第一问
 
@@ -145,8 +116,9 @@ Let $z \in {R}^{n}$ be an n-vector. Show that $A = z{z}^T$ is positive semi-defi
 
 $zz^T=\begin{bmatrix} z_1 \\ z_2 \\ \vdots \\ z_n \end{bmatrix} \begin{bmatrix} z_1 & z_2 & \cdots & z_n \end{bmatrix}=\begin{bmatrix} z_1z_1 & z_1z_2 & \cdots & z_1z_n \\ z_2z_1 & z_2z_2 & \cdots & z_2z_n \\ \vdots &\vdots &\ddots & \vdots \\ z_nz_1 & z_nz_2 & \cdots &z_nz_n\end{bmatrix}​$
 
-$ \therefore A_{ij} = z_iz_j$
+$\therefore A_{ij} = z_iz_j$
 
-由第一题可知：${x}^{T}Ax =\sum_{i=1}^{n}{\sum_{j=1}^{n}{{A}_{ij}{x}_{i}}{x}_{j}}=\sum_{i=1}^{n}{\sum_{j=1}^{n}{z_iz_j{x}_{i}}{x}_{j}}=\sum_{i=1}^{n}z_ix_i\sum_{j=1}^{n}z_ix_j={(\sum_{i=1}^{n}z_ix_i)}^2 \ge 0$  for $x\in R^n$
+由第一题可知:\
+${x}^{T}Ax =\sum_{i=1}^{n}{\sum_{j=1}^{n}{{A}_{ij}{x}_{i}}{x}_{j}}=\sum_{i=1}^{n}{\sum_{j=1}^{n}{z_iz_j{x}_{i}}{x}_{j}}=\sum_{i=1}^{n}z_ix_i\sum_{j=1}^{n}z_ix_j={(\sum_{i=1}^{n}z_ix_i)}^2 \ge 0$  for $x\in R^n$
 
 所以：A is PSD。
