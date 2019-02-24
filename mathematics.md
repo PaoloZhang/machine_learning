@@ -58,7 +58,7 @@ $= \begin{bmatrix} {x}_{1} & {x}_{2} &  \cdots  & {x}_{n}  \end{bmatrix} \begin{
 
     ### 小结
 
-这是个很形式化的结论，如果A,x,b是标量，我们可轻易得到结论：$\\triangledown (A{x}^{2}+bx) = 2Ax + b$.
+这是个很形式化的结论，如果A,x,b是标量，我们可轻易得到结论：$\triangledown (A{x}^{2}+bx) = 2Ax + b$.
 
 由本题推算过程可知：这个结论当x为向量时，依然成立，只是 $A{x}^{2}​$需表述成：${x}^{T}Ax​$,且$A​$必须为对称矩阵;$bx​$需表述成${b}^{T}x​$。
 
@@ -100,11 +100,11 @@ $\triangledown^{2}g(x)= \begin{bmatrix} {C}_{11} & C_{12} & \cdots & C_{1n} \\ {
 可知：\
 $\triangledown^{2}g(x) = a\cdot {a}^{T}{g}^{''}({a}^{T}x)​$
 
-## 第二题、{Positive definite matrices}
+## 第二题{Positive definite matrices}
 
 ### 题目
 
-A matrix $A \in {R}^{n×n}$ is positive semi-definite (PSD), denoted $A \ge 0$, if $A = {A}^{T}$ and ${x}^T Ax \ge 0$ for all $x \in {R}^{n}$. A matrix $A$ is positive definite,denoted $A > 0$,if $A={A}^{T}$ and ${x}^TAx>0$ for all $x\ne 0$, that is, all non-zero vectors x.The simplest example of a positive definite matrix is the identity I (the diagonal matrix with 1s on the diagonal and 0s elsewhere), which satisfies ${x}^TIx={\left\| x\right\|}_2^2 = \sum_{i=1}^{n}{{x}_{i}^2}$.
+A matrix $A \in {R}^{n×n}​$ is positive semi-definite (PSD), denoted $A \ge 0​$, if $A = {A}^{T}​$ and ${x}^T Ax \ge 0​$ for all $x \in {R}^{n}​$. A matrix $A​$ is positive definite,denoted $A > 0​$,if $A={A}^{T}​$ and ${x}^TAx>0​$ for all $x\ne 0​$, that is, all non-zero vectors x.The simplest example of a positive definite matrix is the identity I (the diagonal matrix with 1s on the diagonal and 0s elsewhere), which satisfies ${x}^TIx={\left\| x\right\|}_2^2 = \sum_{i=1}^{n}{{x}_{i}^2}​$.
 
 ### 第一问
 
@@ -118,7 +118,51 @@ $zz^T=\begin{bmatrix} z_1 \\ z_2 \\ \vdots \\ z_n \end{bmatrix} \begin{bmatrix} 
 
 $\therefore A_{ij} = z_iz_j$
 
-由第一题可知:\
+由第一题可知:
 ${x}^{T}Ax =\sum_{i=1}^{n}{\sum_{j=1}^{n}{{A}_{ij}{x}_{i}}{x}_{j}}=\sum_{i=1}^{n}{\sum_{j=1}^{n}{z_iz_j{x}_{i}}{x}_{j}}=\sum_{i=1}^{n}z_ix_i\sum_{j=1}^{n}z_ix_j={(\sum_{i=1}^{n}z_ix_i)}^2 \ge 0$  for $x\in R^n$
 
 所以：A is PSD。
+
+###   第二问
+Let  $z \in R^n​$ be a non-zero n-vector. Let $A = zz^T​$ . What is the null-space of A? What is the rank of A?
+
+### 解
+- **知识点 null-space**
+  The nullspace of A consists of all solutions to $Ax=0$. These vectors x are in $R^n$. The nullspace containing all solutions of $Ax=0$ is denoted by $N(A)​$.
+
+因为：z为非0向量，所以： $Ax=0 \Rightarrow zz^Tx=0 \Rightarrow \begin{bmatrix} z_1z_1 & z_1z_2 & \cdots & z_1z_n \\ z_2z_1 & z_2z_2 & \cdots & z_2z_n \\ \vdots &\vdots &\ddots & \vdots \\ z_nz_1 & z_nz_2 & \cdots &z_nz_n\end{bmatrix}x=0 \Rightarrow \begin{bmatrix} z_1z_1 & z_1z_2 & \cdots & z_1z_n \\ 0 & 0 & \cdots & 0 \\ \vdots &\vdots &\ddots & \vdots \\ 0 & 0 & \cdots &0 \end{bmatrix}x=0 \Rightarrow  \begin{bmatrix} z_1 & z_2 & \cdots & z_n \\ 0 & 0 & \cdots & 0 \\ \vdots &\vdots &\ddots & \vdots \\ 0 & 0 & \cdots &0 \end{bmatrix}x=0​$
+
+
+
+可得 $Rank(A) = n-1$.
+
+可知：$x_1$为pivot variable，其他为free variables，所以 special solutions如下：
+
+$s_1 =  \begin{bmatrix} -z_2 \\ z_1 \\ 0\\ \vdots \\ 0 \end{bmatrix}$
+
+$s_2 = \begin{bmatrix} -z_3 \\ 0\\  z_1 \\ \vdots \\ 0 \end{bmatrix}$
+
+
+
+$\vdots​$
+
+$s_{n-2}=  \begin{bmatrix} -z_{n-1} \\ 0 \\ 0\\ \vdots \\ z_1\\ 0  \end{bmatrix}​$
+
+$s_{n-1}=  \begin{bmatrix} -z_n \\ 0 \\ 0\\ \vdots \\ 0 \\ z_1  \end{bmatrix}​$
+
+A的Null Space是$s_1​$ $s_2​$到$s_{n-1}​$共n-1个special solutions的线性组合，即：
+
+$N(A)= c_1s_1 + c_2s_2 + \cdots + c_{n-1}s_(n-1)= \begin{bmatrix} -\sum_{i=1}^{n-1}c_iz_{i+1} \\ c_1z_1\\ \vdots \\c_{n-1} z_1 \end{bmatrix}​$
+
+### 第三问 ###
+
+Let $A \in R^{n\times n}$ be positive semidefinite and $B \in R^{m \times n}$ be arbitrary, where $m, n \in N$. Is $BAB^T$ PSD? If so, prove it. If not, give a counterexample with explicit A, B. 
+
+### 解 ###
+
+1. 令$C=BAB^T​$,则$C^T = BAB^T​$, 且$C \in R^{m \times m}​$.
+
+2. 令 $x \in R^m$, $x^TCx = x^TBAB^Tx=(B^Tx)^TA(B^Tx)$  设: $y = B^Tx $,$y \in R^n$, 因为 A是PSD，所以：$y^TAy \ge 0$ 
+
+   综合1,2,可得 C为PSD，即：$BAB^T$正定。 
+
