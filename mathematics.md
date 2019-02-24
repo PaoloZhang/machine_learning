@@ -108,7 +108,7 @@ A matrix $A \in {R}^{n×n}​$ is positive semi-definite (PSD), denoted $A \ge 0
 
 ### 第一问
 
-Let $z \in {R}^{n}$ be an n-vector. Show that $A = z{z}^T$ is positive semi-definite. 
+Let $z \in {R}^{n}​$ be an n-vector. Show that $A = z{z}^T​$ is positive semi-definite. 
 
 ### 解：
 
@@ -164,5 +164,5 @@ Let $A \in R^{n\times n}$ be positive semidefinite and $B \in R^{m \times n}$ be
 
 2. 令 $x \in R^m$, $x^TCx = x^TBAB^Tx=(B^Tx)^TA(B^Tx)$  设: $y = B^Tx $,$y \in R^n$, 因为 A是PSD，所以：$y^TAy \ge 0$ 
 
-   综合1,2,可得 C为PSD，即：$BAB^T$正定。 
+   综合1,2,可得 C为PSD，即：$BAB^T$为PSD。 
 
