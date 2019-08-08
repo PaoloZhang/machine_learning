@@ -7,21 +7,34 @@ TAB = '│  '
 EMPTY_TAB = '   '
 NEW_LINE = '\n'
 
+'''
+return the bitwise little endian: XWRF
+F: Exists
+R: Read
+W: Write
+X: Excutable
+'''
+def check(path = '.'):
+    privilege = 0
+    if os.access(path, os.F_OK):
+        privilege |= 0x1
+        if os.access(path,os.R_OK):
+            privilege |= (0x1 << 1)
+        if os.access(path,os.W_OK):
+            privilege |= (0x1 << 2)
+        if os.access(path,os.X_OK):
+            privilege |= (0x1 << 3)
+    return privilege
+
+def is_readable(path = '.'):
+    return check(path) & (0x1<<1) 
+
 def tree(path = '.',placeholder = ''):
-    if (os.access(path,os.R_OK)==False):
+    if (False == is_readable(path)):
         return
     folder_list = [folder for folder in os.listdir(path) if os.path.isdir(os.path.join(path,folder))]
     file_list = [file for file in os.listdir(path) if os.path.isfile(os.path.join(path,file))]
-    '''
-    for file in os.listdir(path):
-        if os.path.isfile(os.path.join(path,file)):
-            if (extention == ''):
-                file_list.append(file)
-            else:
-                 (_,ext) = os.path.splitext(file)
-                 if extention == ext:
-                     file_list.append(file)
-    '''
+
     result = ''
     for folder in folder_list[:-1]:
         result += placeholder + BRANCH + folder + NEW_LINE
@@ -35,5 +48,28 @@ def tree(path = '.',placeholder = ''):
         result += placeholder + LAST_BRANCH + file_list[-1]+ NEW_LINE
     return result
 
+def search(file_list,path = '.',extention = ''):
+    #file_list = []
+    if (False == is_readable(path)):
+        return file_list
+    folder_list = [os.path.join(path,folder) for folder in os.listdir(path) if os.path.isdir(os.path.join(path,folder))]
+    
+    for file in os.listdir(path):
+        if os.path.isfile(os.path.join(path,file)):
+            if (extention == ''):
+                file_list.append(os.path.join(path,file))
+            else:
+                 (_,ext) = os.path.splitext(file)
+                 if extention == ext:
+                     file_list.append(os.path.join(path,file))
+    
+    for folder in folder_list:
+        search(file_list,folder,extention)
+    
+def test_search():
+    file_list = []
+    search(file_list,path='/Users',extention='.py')
+    print(file_list)
+
 if __name__ == "__main__":
-    print(tree())
+    test_search()
