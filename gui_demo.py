@@ -25,6 +25,16 @@ class Application(tk.Tk):
         footframe = tk.Frame(master = self).pack(side=tk.BOTTOM)
         tk.Button(master  = footframe,text = 'redraw',command = self.draw).pack(side = tk.BOTTOM)
         tk.Button(master=footframe,text='exit',command=self._quit).pack(side = tk.BOTTOM)
+
+        main_menu = tk.Menu(self)
+
+        file_menu = tk.Menu(main_menu,tearoff = 0)
+
+        file_menu.add_command(label = 'Open',command = self._open_file)
+        file_menu.add_command(label = 'Exit', command = self._quit)
+        main_menu.add_cascade(label = 'File',menu = file_menu)
+        self.config(menu = main_menu)
+
         self.draw()
 
     def draw(self):
@@ -33,45 +43,16 @@ class Application(tk.Tk):
         self.ax.clear()
         self.ax.scatter(x,y,s = 3)
         self.canvas.show()
+
     def _quit(self):
         self.quit()
         self.destroy()
 
-
-
-
-def init_window():
-    window = tk.Tk()
-
-    window.title('demo')
-
-    window.geometry('1024x768')
-    
-    label = tk.Label(window,text ='This is tkinter',bg = 'green',font=('Arial',12),width = 30,height = 2)
-
-    label.pack()
-    
-    canvas = tk.Canvas(window,width = 500,height =768 )
-    canvas.pack()
-    
-    main_menu = tk.Menu(window)
-
-    file_menu = tk.Menu(main_menu,tearoff = 0)
-
-    file_menu.add_command(label = 'Open',command = open_file)
-    file_menu.add_command(label = 'Exit', command = window.quit)
-    main_menu.add_cascade(label = 'File',menu = file_menu)
-    
-    window.config(menu = main_menu)
-
-    window.mainloop()
-
-def open_file():
-    file = tk.filedialog.askopenfilename() 
-    image = Image.open(file) 
-    image.show()
+    def _open_file(self):
+        file = tk.filedialog.askopenfilename() 
+        image = Image.open(file) 
+        image.show()
 
 if  __name__ == '__main__':
-    #init_window()
     app = Application()
     app.mainloop()
