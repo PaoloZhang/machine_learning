@@ -10,7 +10,7 @@ Params::Params(int argc, char *argv[])
     if ((i = ArgPos((char *)"-size", argc, argv)) > 0) 
         layer1_size = atoi(argv[i + 1]);
     if ((i = ArgPos((char *)"-train", argc, argv)) > 0) 
-        strcpy(train_file, argv[i + 1]);
+        strcpy(mTrainFile, argv[i + 1]);
     if ((i = ArgPos((char *)"-save-vocab", argc, argv)) > 0) 
         strcpy(save_vocab_file, argv[i + 1]);
     if ((i = ArgPos((char *)"-read-vocab", argc, argv)) > 0) 

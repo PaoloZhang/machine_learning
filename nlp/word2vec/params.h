@@ -13,7 +13,7 @@ class Params
         char output_file[MAX_FILE_PATH];
         char save_vocab_file[MAX_FILE_PATH];
         char read_vocab_file[MAX_FILE_PATH];
-        char train_file[MAX_FILE_PATH]= {0};
+        char mTrainFile[MAX_FILE_PATH];
         int debug_mode = 2;
         int binary = 0;
         int cbow = 1;
@@ -51,13 +51,17 @@ class Params
     protected:
         Params()
         {
+            mTrainFile[0] = 0;
             output_file[0] = 0;
             save_vocab_file[0] = 0;
             read_vocab_file[0] = 0;
         }
     public:
         const static int MAX_STRING_LENGTH = 1024;
-
+        
+        //The max word length of a word.
+        const static int MAX_WORD_LENGTH = 100;
+        
         Params(int argc, char *argv[]);
         char* toString()
         {
@@ -87,7 +91,7 @@ class Params
                     output_file,
                     save_vocab_file,
                     read_vocab_file,
-                    train_file,
+                    mTrainFile,
                     debug_mode,
                     binary,
                     cbow,
@@ -105,6 +109,11 @@ class Params
                     
         return buffer;
        };
+
+        char* getTrainFile()
+        {
+           return mTrainFile;
+        }
        
 };
 #endif
