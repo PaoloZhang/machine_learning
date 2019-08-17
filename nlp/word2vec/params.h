@@ -1,12 +1,15 @@
 #if !defined(__PARAMS_h__)
 #define __PARAMS_h__
+#include <string>
+using std::string;
+
 
 #define MAX_FILE_PATH 100
-typedef int real;
+typedef float real;
 
 class Params
 {
-    private:
+    private:     
         char output_file[MAX_FILE_PATH];
         char save_vocab_file[MAX_FILE_PATH];
         char read_vocab_file[MAX_FILE_PATH];
@@ -53,6 +56,55 @@ class Params
             read_vocab_file[0] = 0;
         }
     public:
-       Params(int argc, char *argv[]);
+        const static int MAX_STRING_LENGTH = 1024;
+
+        Params(int argc, char *argv[]);
+        char* toString()
+        {
+    
+            static char buffer[MAX_STRING_LENGTH] = {0};
+            //sprintf(buffer,"test:%s\n","hi");
+            
+            sprintf(buffer,"output file: %s\n"
+                    "save_vocab_file:%s\n"
+                    "read_vocab_file:%s\n"
+                    "train_file:%s\n"
+                    "debug_mode:%d\n"
+                    "binary_mode:%d\n"
+                    "cbow:%d\n"
+                    "window:%d\n"
+                    "hs:%d\n"
+                    "negative:%d\n"
+                    "num_threads:%d\n"
+                    "iter:%d\n"
+                    "min_count:%d\n"
+                    "classes:%d\n"
+                    "alpha:%f\n"
+                    "starting alpha:%f\n"
+                    "sample:%f\n"
+                    "layer1_size:%f\n",
+
+                    output_file,
+                    save_vocab_file,
+                    read_vocab_file,
+                    train_file,
+                    debug_mode,
+                    binary,
+                    cbow,
+                    window,
+                    hs,
+                    negative,
+                    num_threads,
+                    iter,
+                    min_count,
+                    classes,
+                    alpha,
+                    starting_alpha,
+                    sample,
+                    layer1_size);
+                    
+        return buffer;
+       };
+       
 };
 #endif

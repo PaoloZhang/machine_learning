@@ -48,6 +48,11 @@ int main(int argc, char *argv[])
         return 0;
     }
     Params *params = new Params(argc,argv);
+    if (params != 0) {
+        char* paramBuff = params->toString();
+        printf("params:%s\n",paramBuff);
+    }
     delete params;
+    params = 0;
     return 0;
 }
