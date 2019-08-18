@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "params.h"
+#include "TrainFileReader.h"
+#include "WordVocab.h"
 
 int main(int argc, char *argv[]) 
 {
@@ -51,6 +53,9 @@ int main(int argc, char *argv[])
     if (params != 0) {
         char* paramBuff = params->toString();
         printf("params:%s\n",paramBuff);
+
+        VocabWords *tokens = new VocabWords(params->getDebugMode());
+        tokens->BuildFromTrainFile(params->getTrainFile(),params->getMinCount());
     }
     delete params;
     params = 0;

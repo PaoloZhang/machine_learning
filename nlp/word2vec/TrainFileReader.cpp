@@ -1,6 +1,8 @@
 #include "TrainFileReader.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <math.h>
 #include "params.h"
 
 TrainFileReader::TrainFileReader(char *file) 
@@ -16,10 +18,11 @@ TrainFileReader::TrainFileReader(char *file)
     }
 }
 
-    void TrainFileReader::ReadWord(char* word)
+    bool TrainFileReader::ReadWord(char* word)
     {
         if (fp != 0)
         {
+            if (feof(fp)) return false;
             // index is the index into 'word'.
             int index = 0;
             char ch;
@@ -52,10 +55,11 @@ TrainFileReader::TrainFileReader(char *file)
                     if (ch == '\n') 
                     {
                         strcpy(word, (char *)"</s>");
-                            return;
+                            return true;
                         // If the word is empty and the character is tab or space, just continue
                         // on to the next character.     
-                    }   else continue;
+                    }   
+                    else continue;
                 }
     
                 // If the character wasn't space, tab, CR, or newline, add it to the word.
@@ -67,12 +71,13 @@ TrainFileReader::TrainFileReader(char *file)
                 if (index >= Params::MAX_STRING_LENGTH - 1) 
                 {
                     index--;
-                }   
+                }
             }
-  
             // Terminate the string with null.
             word[index] = 0;
+            return true;
         }
+        return false;
     }
 
 void TrainFileReader::StartRead()

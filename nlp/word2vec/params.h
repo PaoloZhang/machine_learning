@@ -114,6 +114,14 @@ class Params
         {
            return mTrainFile;
         }
-       
+        //The min frequency of the tokens;
+        int getMinCount()
+        {
+            return min_count;
+        }
+        int getDebugMode()
+        {
+            return  debug_mode;
+        }
 };
 #endif
