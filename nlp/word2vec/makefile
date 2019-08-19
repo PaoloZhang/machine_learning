@@ -46,10 +46,25 @@ all: build
 
 build: params.o word2vec.o TrainFileReader.o
 
-	#$(CPP) -c $(CFLAGS) $(SRCS)
-	$(CPP) $(CFLAGS) -o w2c  params.o word2vec.o TrainFileReader.o
-	#$(LDFLAGS)
-	#$(RM)  $(OBJS)
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/local/Cellar/cmake/3.8.1/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
+# The main all target
+all: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Mac/code/machine_learning/nlp/word2vec/CMakeFiles /Users/Mac/code/machine_learning/nlp/word2vec/CMakeFiles/progress.marks
+	$(MAKE) -f CMakeFiles/Makefile2 all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Mac/code/machine_learning/nlp/word2vec/CMakeFiles 0
+.PHONY : all
+
+# The main clean target
 clean:
 	$(RM) $(OBJS) $(TARGET)
 

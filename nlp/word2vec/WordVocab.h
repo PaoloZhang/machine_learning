@@ -1,5 +1,6 @@
 #if !defined(__WORDVOCAB_h__)
 #define __WORDVOCAB_h__
+
 #include <stdlib.h>
 /*
  a chunk size for allocating the vocabulary table. The vocabulary table will
@@ -8,72 +9,87 @@
 #define vocab_chunk_size 1000
 
 struct vocab_word {
-  long long cn;
-  int *point;
-  char *word, *code, codelen;
+    long long cn;
+    int *point;
+    char *word, *code, codelen;
 };
+
+struct table {
+    const static int size = 1e8;
+};
+
 class VocabWords {
-    private:  
-        vocab_word * mVocabs;
-        //if the token frequency < mMinReduced, remove the token.
-        int mDebugMode;
-        /*
-        * The size of the hash table for the vocabulary.
-        * The vocabulary won't be allowed to grow beyond 70% of this number.
-        * For instance, if the hash table has 30M entries, then the maximum
-        * vocab size is 21M. This is to minimize the occurrence (and performance
-        * impact) of hash collisions.
-        */
-        const int vocab_hash_size = 30000000;  // Maximum 30 * 0.7 = 21M words in the vocabulary
+private:
+    vocab_word *mVocabs;
+    //if the token frequency < mMinReduced, remove the token.
+    int mDebugMode;
+    /*
+    * The size of the hash table for the vocabulary.
+    * The vocabulary won't be allowed to grow beyond 70% of this number.
+    * For instance, if the hash table has 30M entries, then the maximum
+    * vocab size is 21M. This is to minimize the occurrence (and performance
+    * impact) of hash collisions.
+    */
+    const int vocab_hash_size = 30000000;  // Maximum 30 * 0.7 = 21M words in the vocabulary
 
-        int *vocab_hash; 
-        //vocab size: The unique vocab, don't count the same one.
-        int vocab_size;
-        // allocated the zie.
-        int mAllocSize;
-        //train word size.
-        int train_words;
+    int *vocab_hash;
+    //vocab size: The unique vocab, don't count the same one.
+    long long vocab_size;
+    // allocated the zie.
+    int mAllocSize;
+    //train word size.
+    long long train_words;
 
-        int GetWordHash(char *word);
+    int mUnigramSize = 1e8;
+    int *mUnigramTable;
 
-        void ClearHashTable()
-        {
-            for (int a = 0; a < vocab_hash_size; a++) 
-            {
-                vocab_hash[a] = -1;
-            } 
+    int GetWordHash(char *word);
+
+    void ClearHashTable() {
+        for (int a = 0; a < vocab_hash_size; a++) {
+            vocab_hash[a] = -1;
+        }
+    }
+
+    int SearchVocab(char *word);
+
+    void ReduceVocab(int minReduce);
+
+    void SortVocab(int minReduce);
+
+    static int VocabCompare(const void *a, const void *b);
+
+public:
+    VocabWords(int debugMode) {
+        // Init allocate the vocabulary table.
+        mAllocSize = vocab_chunk_size;
+        mVocabs = (struct vocab_word *) calloc(mAllocSize, sizeof(struct vocab_word));
+        vocab_hash = (int *) calloc(vocab_hash_size, sizeof(int));
+        ClearHashTable();
+        vocab_size = 0;
+        train_words = 0;
+        mDebugMode = debugMode;
+        mUnigramTable = 0;
+
+    }
+
+    virtual ~VocabWords() {
+        if (mUnigramTable != 0) {
+            free(mUnigramTable);
+            mUnigramTable = 0;
         }
 
-        int SearchVocab(char *word);
+    }
 
-        void ReduceVocab(int minReduce);
-        void SortVocab(int minReduce);
-        static int VocabCompare(const void *a, const void *b);
+    int AddWord(char *word);
 
-    public:
-        VocabWords(int debugMode)
-        {   
-            // Init allocate the vocabulary table.
-            mAllocSize = vocab_chunk_size;
-            mVocabs = (struct vocab_word *)calloc(mAllocSize, sizeof(struct vocab_word));
-            vocab_hash = (int *)calloc(vocab_hash_size, sizeof(int));
-            ClearHashTable();
-            vocab_size = 0;
-            train_words = 0;
-            mDebugMode = debugMode;
-           
-        }
-        virtual ~VocabWords()
-        {
+    /*
+    Build the vocabs from the train file.
+    */
+    void BuildFromTrainFile(char *fileName, int minReduced);
 
-        }
-        int AddWord(char* word);
+    void InitUnigramTable();
 
-        /*
-        Build the vocabs from the train file.
-        */
-        void BuildFromTrainFile(char* fileName, int minReduced);
-        
 };
 
 

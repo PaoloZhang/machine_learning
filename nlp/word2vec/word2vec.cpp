@@ -3,10 +3,8 @@
 #include "TrainFileReader.h"
 #include "WordVocab.h"
 
-int main(int argc, char *argv[]) 
-{
-    if (argc == 1)
-    {
+int main(int argc, char *argv[]) {
+    if (argc == 1) {
         printf("WORD VECTOR estimation toolkit v 0.1c\n\n");
         printf("Options:\n");
         printf("Parameters for training:\n");
@@ -49,13 +47,14 @@ int main(int argc, char *argv[])
         printf("./word2vec -train data.txt -output vec.txt -size 200 -window 5 -sample 1e-4 -negative 5 -hs 0 -binary 0 -cbow 1 -iter 3\n\n");
         return 0;
     }
-    Params *params = new Params(argc,argv);
+    Params *params = new Params(argc, argv);
     if (params != 0) {
-        char* paramBuff = params->toString();
-        printf("params:%s\n",paramBuff);
+        char *paramBuff = params->toString();
+        printf("params:%s\n", paramBuff);
 
         VocabWords *tokens = new VocabWords(params->getDebugMode());
-        tokens->BuildFromTrainFile(params->getTrainFile(),params->getMinCount());
+        tokens->BuildFromTrainFile(params->getTrainFile(), params->getMinCount());
+        tokens->InitUnigramTable();
     }
     delete params;
     params = 0;
