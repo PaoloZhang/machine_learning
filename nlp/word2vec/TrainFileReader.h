@@ -9,15 +9,19 @@ private:
      * The file pointer to the train file.
      */
     FILE *fp;
+    /**
+     * the file length (bytes).
+     */
+    long mFileSize;
 
 public:
-    TrainFileReader(char *file);
+    TrainFileReader(const char *file);
 
     virtual ~TrainFileReader() {
-        if (fp != 0) {
-            fclose(fp);
-            fp = 0;
-        }
+      if (fp != 0) {
+        fclose(fp);
+        fp = 0;
+      }
     }
 
     /**
@@ -29,9 +33,18 @@ public:
     *   return - false:fail to read a word.
     *            true: succeed to read a word.
     */
-    bool ReadWord(char *word);
+    static bool ReadWord(char *word,FILE *fp);
+
+    bool ReadWord(char *word) {
+      return ReadWord(word,fp);
+    }
+
+    // Seek to the position of the file.
+    void Seek(int pos);
 
     void StartRead();
+
+    long getFileSize() {return mFileSize;}
 };
 
 #endif

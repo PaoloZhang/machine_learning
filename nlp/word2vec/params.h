@@ -5,17 +5,52 @@
 
 using std::string;
 
-
-#define MAX_FILE_PATH 100
 typedef float real;
 
-class Params {
-private:
-    char output_file[MAX_FILE_PATH];
+const static int MAX_FILE_PATH = 100;
+
+class VocabParams {
+protected:
     char save_vocab_file[MAX_FILE_PATH];
     char read_vocab_file[MAX_FILE_PATH];
     char mTrainFile[MAX_FILE_PATH];
+    int min_count = 5;
+public:
+    VocabParams() {
+      mTrainFile[0] = 0;
+      save_vocab_file[0] = 0;
+      read_vocab_file[0] = 0;
+    }
+
+    const char *getTrainFile() {
+      return mTrainFile;
+    }
+
+    const char* getSaveVocabFile(){
+      return save_vocab_file;
+    }
+
+    const char* getReadVocabFile() {
+      return read_vocab_file;
+    }
+
+    //The min frequency of the tokens;
+    int getMinCount() {
+      return min_count;
+    }
+};
+
+class Params: VocabParams{
+
+private:
+    //Common Params
     int debug_mode = 2;
+
+    //Vocab Params.
+
+
+    char output_file[MAX_FILE_PATH];
+
     int binary = 0;
     int cbow = 1;
     int window = 5;
@@ -23,7 +58,7 @@ private:
     int negative = 5;
     int num_threads = 12;
     int iter = 5;
-    int min_count = 5;
+
     int classes = 0;
     /*
      * TODO- Learning rate.
@@ -33,7 +68,7 @@ private:
     /*
     * ======== starting_alpha ========
     */
-    real starting_alpha;
+    //real starting_alpha;
     /* ======== sample ========
     * This parameter controls the subsampling of frequent words.
     * Smaller values of 'sample' mean words are less likely to be kept.
@@ -48,16 +83,20 @@ private:
     */
     int layer1_size = 100;
 
+    Params() {
+      VocabParams();
+      output_file[0] = 0;
+
+    }
+    struct ObjectCreator {
+        ObjectCreator() {
+          Params::getInstance();
+        }
+    };
+    static ObjectCreator objectCreator;
+
     static int ArgPos(char *str, int argc, char **argv);
 
-protected:
-
-    Params() {
-        mTrainFile[0] = 0;
-        output_file[0] = 0;
-        save_vocab_file[0] = 0;
-        read_vocab_file[0] = 0;
-    }
 
 public:
 
@@ -69,67 +108,72 @@ public:
     //The max Length of one sentence.(The number of the words.)
     const static int MAX_SENTENCE_LENGTH = 1000;
 
-    Params(int argc, char *argv[]);
+    void Parse(int argc, char *argv[]);
 
 
-    char *toString() {
+    const char *toString() {
 
-        static char buffer[MAX_STRING_LENGTH] = {0};
-        //sprintf(buffer,"test:%s\n","hi");
+      static char buffer[MAX_STRING_LENGTH] = {0};
+      //sprintf(buffer,"test:%s\n","hi");
 
-        sprintf(buffer, "output file: %s\n"
-                        "save_vocab_file:%s\n"
-                        "read_vocab_file:%s\n"
-                        "train_file:%s\n"
-                        "debug_mode:%d\n"
-                        "binary_mode:%d\n"
-                        "cbow:%d\n"
-                        "window:%d\n"
-                        "hs:%d\n"
-                        "negative:%d\n"
-                        "num_threads:%d\n"
-                        "iter:%d\n"
-                        "min_count:%d\n"
-                        "classes:%d\n"
-                        "alpha:%f\n"
-                        "starting alpha:%f\n"
-                        "sample:%f\n"
-                        "layer1_size:%f\n",
+      sprintf(buffer, "output file: %s\n"
+                      "save_vocab_file:%s\n"
+                      "read_vocab_file:%s\n"
+                      "train_file:%s\n"
+                      "debug_mode:%d\n"
+                      "binary_mode:%d\n"
+                      "cbow:%d\n"
+                      "window:%d\n"
+                      "hs:%d\n"
+                      "negative:%d\n"
+                      "num_threads:%d\n"
+                      "iter:%d\n"
+                      "min_count:%d\n"
+                      "classes:%d\n"
+                      "alpha:%f\n"
+                      "sample:%f\n"
+                      "layer1_size:%f\n",
 
-                output_file,
-                save_vocab_file,
-                read_vocab_file,
-                mTrainFile,
-                debug_mode,
-                binary,
-                cbow,
-                window,
-                hs,
-                negative,
-                num_threads,
-                iter,
-                min_count,
-                classes,
-                alpha,
-                starting_alpha,
-                sample,
-                layer1_size);
+              output_file,
+              save_vocab_file,
+              read_vocab_file,
+              mTrainFile,
+              debug_mode,
+              binary,
+              cbow,
+              window,
+              hs,
+              negative,
+              num_threads,
+              iter,
+              min_count,
+              classes,
+              alpha,
+              sample,
+              layer1_size);
 
-        return buffer;
+      return buffer;
     };
 
-    char *getTrainFile() {
-        return mTrainFile;
-    }
 
-    //The min frequency of the tokens;
-    int getMinCount() {
-        return min_count;
-    }
 
     int getDebugMode() {
-        return debug_mode;
+      return debug_mode;
     }
+
+    // return the layer1 size: the neurons of the hidden layer.
+    int getLayer1Size() {return layer1_size;}
+
+    float getAlpha() {return alpha;}
+    int getThreadNum(){return num_threads;}
+
+    static Params* getInstance();
+
+    VocabParams* extractVocabParams() {
+      return this;
+    }
+
 };
-static Params *mInstance;
+
+
 #endif
